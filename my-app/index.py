@@ -57,13 +57,14 @@ def index():
 @app.route('/hello')
 @app.route('/hello/<name>')
 @app.route('/hello/<name>/<int:age>')
-def hello(name = None, age = None):
-    if name == None and age == None:
-        return '<h1>Hola Mundo</h1>'
-    elif age == None:
-        return f'Hola, {name}'
-    else:
-        return f'Hola, {name}! Tu edad es: {age}'
+@app.route('/hello/<name>/<int:age>/<email>')
+def hello(name = None, age = None, email = None):
+    my_data = {
+        'name': name,
+        'age': age,
+        'email': email
+    }
+    return render_template('hello.html', data = my_data)
     
 
 # Se utiliza escape !!!! para evitar ataques (como ataque de inyecciones), con esto lo que se ingrese en la url se ejecuta como texto plano
