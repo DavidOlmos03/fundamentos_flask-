@@ -71,6 +71,7 @@ def api(name = None, age = None, email = None):
         'age': age,
         'email': email
     }
+   
     return render_template('api.html', data = my_data)
     
 
@@ -118,3 +119,21 @@ def register():
         password = form.password.data
         return f"Username {username} and password {password}"
     return render_template('auth/register.html', form = form)
+
+
+
+
+
+# consumir API json
+import json
+
+with open('db.json', 'r') as file:
+    data = json.load(file)
+
+# Acceder a los datos de los científicos
+cientificos = data[0]['cientificos']
+
+# Acceder a los datos de Einstein
+einstein = cientificos['Einstein']
+
+print(cientificos)
