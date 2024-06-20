@@ -7,9 +7,9 @@
 {% block description_header %}
     {% if name %}
         <!-- | es para agregar un nombre de filtro a utilizar -->
-        <p class="text-light text-center">Bienvenido {{name | upper }}</p>  
+        <p class="text-light text-center mb-0">Bienvenido {{name | upper }}</p>  
     {% else %}
-        <p class="text-light text-center">Hola Desconocido</p>  
+        <p class="text-light text-center mb-0">Hola Desconocido</p>  
     {% endif %}
 {% endblock %}
 <!-- end Header -->
@@ -22,7 +22,8 @@
         <li>{{ friend }}</li>
     {% endfor %}
     <h5>Fecha actual: {{ date | today }}</h5>
-    <!-- <img src="../assets/img/alan-turing.png" class="img-thumbnail" alt="Imagen"> -->
+    <!-- Para utilizar archivos estaticos, se utiliza url_for y filename -->
+    <img src="{{url_for('static', filename = 'img/alan-turing.png' )}}" class="img-thumbnail w-25 h-25 mx-auto" alt="Imagen">
     <h6>La frase repetida es: {{ repeat('Hi ',5) }}</h6>
 {% endblock %}
 <!-- end body -->
