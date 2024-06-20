@@ -17,10 +17,24 @@
 <!-- Start body -->
 <!-- Se inserta el contenido dentro de la plantilla base -->
 {% block content %}
-    <h3>Lista de amigos</h3>
-    {% for friend in friends | reverse %}
+    <h3>Lista de cienficos</h3>
+    <!-- {% for friend in friends | reverse %}
         <li>{{ friend }}</li>
-    {% endfor %}
+    {% endfor %} -->
+    <div class="row g-4 m-auto">
+        {% for name,properties in db.items(): %}
+            <div class="col-md">
+                <div class="card" style="width: 20rem;">
+                    <img src="{{url_for('static', filename = 'img/'+ properties['url_image'])}}" class="card-img-top p-2" alt="...">
+                    <div class="card-body">
+                    <h5 class="card-title">{{properties['name']}}</h5>
+                    <p class="card-text">{{properties['description']}}</p>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    
     <h5>Fecha actual: {{ date | today }}</h5>
     <!-- Para utilizar archivos estaticos, se utiliza url_for y filename -->
     <img src="{{url_for('static', filename = 'img/alan-turing.png' )}}" class="img-thumbnail w-25 h-25 mx-auto" alt="Imagen">

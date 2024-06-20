@@ -1,5 +1,8 @@
 from flask import Flask, render_template, url_for, request
 from datetime import datetime
+# consumir API json
+import json
+
 
 # Indica que este sera el modulo(archivo) principal de nuestra aplicación
 app = Flask(__name__)
@@ -32,10 +35,23 @@ app.add_template_global(repeat, 'repeat')
 @app.route('/')
 @app.route('/index')
 def index():
-    print(url_for('index'))
-    print(url_for('api'))
-    print(url_for('api',name='David',age=23))
-    print(url_for('code', code = 'print("Hola")'))
+    # print(url_for('index'))
+    # print(url_for('api'))
+    # print(url_for('api',name='David',age=23))
+    # print(url_for('code', code = 'print("Hola")'))
+
+    with open('db.json', 'r') as file:
+        data = json.load(file)
+
+    # Acceder a los datos de los científicos
+    cientificos = data[0]['cientificos']
+
+    # Acceder a los datos de Einstein
+    # einstein = cientificos['Einstein']
+
+    db = cientificos
+
+    print(db)
     # Enviar datos al template con render_template de flask
     name = 'David'
     # name = None
@@ -48,9 +64,10 @@ def index():
         # asi se haria sin el filtro
         # date = today(date)
         # Así se hace con el filtro
-        date = date
+        date = date,
         # aqui tambien puedo enviar funciones como por ejemplo 
         # repeat = repeat
+        db = db
         )
 
 
@@ -124,16 +141,3 @@ def register():
 
 
 
-# consumir API json
-import json
-
-with open('db.json', 'r') as file:
-    data = json.load(file)
-
-# Acceder a los datos de los científicos
-cientificos = data[0]['cientificos']
-
-# Acceder a los datos de Einstein
-einstein = cientificos['Einstein']
-
-print(cientificos)
